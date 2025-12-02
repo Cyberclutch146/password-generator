@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Master - Security & Fun</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="background"></div>
+  
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">🔐 PasswordMaster</div>
+      <div class="nav-links">
+        <button class="nav-link" data-tab="generator">Generator</button>
+        <button class="nav-link" data-tab="strength">Strength Tester</button>
+        <button class="nav-link" data-tab="games">Mini Games</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Secure Your Digital Life</h1>
+      <p class="hero-subtitle">Generate unbreakable passwords and learn security through interactive games</p>
+      <button class="hero-cta" onclick="scrollToGenerator()">Get Started</button>
+    </div>
+    <div class="hero-visual">
+      <div class="floating-orb orb-1"></div>
+      <div class="floating-orb orb-2"></div>
+      <div class="floating-orb orb-3"></div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Generator Tab -->
+    <section class="tab-content active" id="generator-tab">
+      <div class="card">
+        <h2 class="card-title">Password Generator</h2>
+        
+        <div class="password-display">
+          <input type="text" id="passwordInput" class="password-input" readonly placeholder="Generate a password...">
+          <button id="copyBtn" class="copy-button">
+            <span class="copy-icon">📋</span>
+            <span class="copy-text">Copy</span>
+          </button>
+        </div>
+
+        <div class="strength-meter">
+          <div class="strength-bar" id="strengthBar"></div>
+        </div>
+        <p class="strength-text" id="strengthText">Strong</p>
+
+        <div class="options-section">
+          <div class="option-group">
+            <label for="lengthInput" class="label">Password Length: <span id="lengthDisplay">16</span></label>
+            <div class="length-controls">
+              <input type="range" id="lengthSlider" min="8" max="128" value="16" class="slider">
+              <input type="number" id="lengthInput" min="8" max="128" value="16" class="length-input">
+            </div>
+          </div>
+
+          <div class="checkboxes-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="uppercase" class="checkbox-input" checked>
+              <span class="checkbox-custom"></span>
+              <span>Uppercase (A–Z)</span>
+            </label>
+            
+            <label class="checkbox-label">
+              <input type="checkbox" id="lowercase" class="checkbox-input" checked>
+              <span class="checkbox-custom"></span>
+              <span>Lowercase (a–z)</span>
+            </label>
+            
+            <label class="checkbox-label">
+              <input type="checkbox" id="numbers" class="checkbox-input" checked>
+              <span class="checkbox-custom"></span>
+              <span>Numbers (0–9)</span>
+            </label>
+            
+            <label class="checkbox-label">
+              <input type="checkbox" id="symbols" class="checkbox-input" checked>
+              <span class="checkbox-custom"></span>
+              <span>Symbols (!@#$%^&*...)</span>
+            </label>
+          </div>
+        </div>
+
+        <button id="generateBtn" class="generate-button">Generate Password</button>
+      </div>
+    </section>
+
+    <!-- Strength Tester Tab -->
+    <section class="tab-content" id="strength-tab">
+      <div class="card">
+        <h2 class="card-title">Password Strength Tester</h2>
+        
+        <div class="strength-input-group">
+          <input type="text" id="testPassword" class="strength-test-input" placeholder="Enter any password to test...">
+          <button id="testBtn" class="test-button">Test Strength</button>
+        </div>
+
+        <div id="strengthResult" class="strength-result">
+          <div class="result-meter">
+            <div class="result-bar" id="resultBar"></div>
+          </div>
+          <p class="result-text" id="resultText">Enter a password to test</p>
+          <div class="result-tips" id="resultTips"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mini Games Tab -->
+    <section class="tab-content" id="games-tab">
+      <div class="games-grid">
+        <!-- Game 1: Pattern Matcher -->
+        <div class="card game-card">
+          <h2 class="card-title">Pattern Matcher</h2>
+          <p class="game-description">Remember and recreate the pattern!</p>
+          <div class="pattern-board" id="patternBoard">
+            <div class="pattern-tile" data-id="0"></div>
+            <div class="pattern-tile" data-id="1"></div>
+            <div class="pattern-tile" data-id="2"></div>
+            <div class="pattern-tile" data-id="3"></div>
+          </div>
+          <div class="game-stats">
+            <p>Level: <span id="patternLevel">1</span></p>
+            <button id="patternStartBtn" class="small-button">Start</button>
+          </div>
+        </div>
+
+        <!-- Game 2: Word to Password -->
+        <div class="card game-card">
+          <h2 class="card-title">Word to Password</h2>
+          <p class="game-description">Convert words into secure passwords!</p>
+          <div class="word-game-area">
+            <input type="text" id="wordInput" class="word-input" placeholder="Enter a word...">
+            <button id="wordConvertBtn" class="small-button">Convert</button>
+            <div id="wordResult" class="word-result"></div>
+          </div>
+        </div>
+
+        <!-- Game 3: Character Hunt -->
+        <div class="card game-card">
+          <h2 class="card-title">Character Hunt</h2>
+          <p class="game-description">Find the correct character type!</p>
+          <div class="hunt-display">
+            <div class="hunt-character" id="huntCharacter">?</div>
+            <div class="hunt-options" id="huntOptions"></div>
+          </div>
+          <div class="game-stats">
+            <p>Score: <span id="huntScore">0</span>/10</p>
+            <button id="huntStartBtn" class="small-button">Start</button>
+          </div>
+        </div>
+
+        <!-- Game 4: Memory Chain -->
+        <div class="card game-card">
+          <h2 class="card-title">Memory Chain</h2>
+          <p class="game-description">Test your memory with sequences!</p>
+          <div class="memory-chain">
+            <div id="memoryDisplay" class="memory-display"></div>
+            <input type="text" id="memoryInput" class="memory-input" placeholder="Type the sequence...">
+          </div>
+          <div class="game-stats">
+            <p>Chain Length: <span id="chainLength">0</span></p>
+            <button id="memoryStartBtn" class="small-button">Start</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>PasswordMaster © 2025 | Securing your digital life, one password at a time 🔐</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
